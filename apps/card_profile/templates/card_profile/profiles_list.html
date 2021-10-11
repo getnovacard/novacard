@@ -1,0 +1,13 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+    <h1 class="subtitle has-text-centered">Nova Card Testing App</h1>
+
+    {% if request.user.is_authenticated %}
+        {% for user_profile in profiles %}
+            <p><a href="{% url 'view_profile' user_profile.username %}">{{ user_profile.username }}</a></p>
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}
+
