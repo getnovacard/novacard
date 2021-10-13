@@ -80,7 +80,7 @@ def update_profile(operations_directory):
     logger.info(f"---> committing changes to remote repository {remote_repo}")
     subprocess.call(commit_command, shell=True)
 
-    #logger.info(f"---> removing the temporary update directory {update_dir}")
-    #delete_directory(update_dir)
+    logger.info(f"---> removing the temporary update directory {update_dir}")
+    delete_directory(update_dir)
 
     logger.info(f"---> update procedure completed successfully")
