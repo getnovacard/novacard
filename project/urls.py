@@ -10,6 +10,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', frontpage, name='frontpage'),
     path('logout/', views.LogoutView.as_view(), name='logout'),
+    path('admin/doc/', include('django.contrib.admindocs.urls')),
     path('login/', views.LoginView.as_view(template_name='core/login.html'), name='login'),
     path('admin/', admin.site.urls),
     path('card_profiles/', include('apps.card_profile.urls')),
