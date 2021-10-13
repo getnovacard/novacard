@@ -5,10 +5,6 @@ from uuid import uuid4
 
 class Card_profile(models.Model):
 
-    """
-    Stores all fields in the '_config.yml' file of the profile's Jekyll page. 
-    """
-
     def path_and_rename(self, filename):
         upload_to = 'uploads'
         ext = filename.split('.')[-1]
@@ -32,7 +28,7 @@ class Card_profile(models.Model):
     url = models.URLField(max_length=200, unique=True)
     avatar = models.ImageField(upload_to=path_and_rename, height_field=None, width_field=None,
                                max_length=255, blank=True, null=True)
-    first_name = models.CharField(max_length=255, help_text="The first name of the profile owner")
+    first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     gender = models.CharField(max_length=1, choices=CHOICES_GENDER)
     title = models.CharField(max_length=255, blank=True, null=True)

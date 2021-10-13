@@ -35,7 +35,6 @@ INSTALLED_APPS = [
     'apps.card_profile',
     'fontawesomefree',
     'django_celery_results',
-    'django.contrib.admindocs',
 ]
 
 MIDDLEWARE = [
