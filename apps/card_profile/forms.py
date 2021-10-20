@@ -1,12 +1,13 @@
 from django import forms
-from .models import Card_profile
+from .models import Card
 
 
 class EditProfile(forms.ModelForm):
     class Meta:
-        model = Card_profile
+        model = Card
         fields = [
-            'avatar',
+            'avatar_image',
+            'bg_image',
             'first_name',
             'last_name',
             'title',
@@ -28,4 +29,3 @@ class EditProfile(forms.ModelForm):
             'github_url',
             'gitlab_url',
         ]
-        pass

@@ -27,3 +27,22 @@ html {
         margin-right: auto;
     }
 }
+
+img#frontpage-logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+input#id_password {
+  margin-left: 5px;
+  margin-bottom: 10px;
+}
+
+img#navbar_logo {
+  margin-right: 3px;
+}
+
+a#user-icon {
+  margin-bottom: 0.5rem;
+}

@@ -1,0 +1,12 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+    {% if cards.count > 0 %}
+        {% for card in cards %}
+            <h1 class="subtitle has-text-centered">Card: {{ card.first_name }} {{ card.last_name }}</h1>
+        {% endfor %}
+    {% else %}
+        <h1 class="subtitle has-text-centered">You have not created your card profile. To do so, please click the button below.</h1>
+        <h1 class="has-text-centered"><a href="" class="button is-success">Create card</a></h1>
+    {% endif %}
+{% endblock %}

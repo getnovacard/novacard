@@ -1,9 +1,8 @@
 from django.urls import path
 
-from .views import profiles_list, view_profile, edit_profile
+from .views import view_card, edit_card
 
 urlpatterns = [
-    path('', profiles_list, name='profiles_list'),
-    path('profile/<str:username>/', view_profile, name='view_profile'),
-    path('profile/<str:username>/edit/', edit_profile, name='edit_profile'),
+    path('<str:username>/', view_card, name='view_card'),
+    path('<str:username>/edit/', edit_card, name='edit_card'),
 ]

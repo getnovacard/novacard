@@ -5,3 +5,4 @@ db.sqlite3
 md5sum
 __pycache__/
 migrations/
+log/
