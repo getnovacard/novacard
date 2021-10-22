@@ -10,6 +10,7 @@ class EditProfile(forms.ModelForm):
             'bg_image',
             'first_name',
             'last_name',
+            'gender',
             'title',
             'company',
             'email',
@@ -28,4 +29,5 @@ class EditProfile(forms.ModelForm):
             'skype_url',
             'github_url',
             'gitlab_url',
+            'custom_card_name',
         ]

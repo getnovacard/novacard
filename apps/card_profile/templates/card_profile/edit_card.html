@@ -2,7 +2,7 @@
 
 {% block content %}
         {% if request.user.is_authenticated %}
-                <h1 class="title">Edit profile {{ user_profile.username }}</h1>
+                <h1 class="title">Edit profile {{ card_profile.username }}</h1>
 
                 <form method="post" action="." enctype="multipart/form-data" >
                         {% csrf_token %}
@@ -19,7 +19,7 @@
                         {% endif %}
 
                         <div class="field">
-                                <label>Avatar:</label>{{ user_profile.avatar }} <br>
+                                <label>Avatar:</label>{{ card_profile.avatar_image }} <br>
 
                                 <div class="control">
                                         <input
@@ -29,6 +29,33 @@
                                                 type="file"
                                                 accept="image/png, image/jpeg"
                                         >
+                                </div>
+                        </div>
+
+                        <div class="field">
+                                <label>Background:</label>{{ card_profile.bg_image }} <br>
+
+                                <div class="control">
+                                        <input
+                                                class="input"
+                                                name="avatar"
+                                                id="id_avatar"
+                                                type="file"
+                                                accept="image/png, image/jpeg"
+                                        >
+                                </div>
+                        </div>
+
+                        <div class="field">
+                                <label>Gender:</label>
+            
+                                <div class="control">
+                                    <div class="select">
+                                        <select name="gender">
+                                            <option value="M" {% if card_profile.gender == 'M' %}selected{% endif %}>M</option>
+                                            <option value="F" {% if card_profile.gender == 'F' %}selected{% endif %}>F</option>
+                                        </select>
+                                    </div>
                                 </div>
                         </div>
 
@@ -43,7 +70,7 @@
                                                                 type="text"
                                                                 name="first_name"
                                                                 id="id_first_name"
-                                                                value="{% if user_profile.first_name %}{{ user_profile.first_name }}{% endif %}"
+                                                                value="{% if card_profile.first_name %}{{ card_profile.first_name }}{% endif %}"
                                                         >
                                                 </div>
                                         </div>
@@ -57,7 +84,7 @@
                                                                 type="text"
                                                                 name="last_name"
                                                                 id="id_last_name"
-                                                                value="{% if user_profile.last_name %}{{ user_profile.last_name }}{% endif %}"
+                                                                value="{% if card_profile.last_name %}{{ card_profile.last_name }}{% endif %}"
                                                         >
                                                 </div>
                                         </div>
@@ -75,7 +102,7 @@
                                                                 type="text"
                                                                 name="title"
                                                                 id="id_title"
-                                                                value="{% if user_profile.title %}{{ user_profile.title }}{% endif %}"
+                                                                value="{% if card_profile.title %}{{ card_profile.title }}{% endif %}"
                                                         >
                                                 </div>
                                         </div>
@@ -89,7 +116,7 @@
                                                                 type="text"
                                                                 name="company"
                                                                 id="id_company"
-                                                                value="{% if user_profile.company %}{{ user_profile.company }}{% endif %}"
+                                                                value="{% if card_profile.company %}{{ card_profile.company }}{% endif %}"
                                                         >
                                                 </div>
                                         </div>
@@ -107,7 +134,7 @@
                                                                 type="email"
                                                                 name="email"
                                                                 id="id_email"
-                                                                value="{% if user_profile.email %}{{ user_profile.email }}{% endif %}"
+                                                                value="{% if card_profile.email %}{{ card_profile.email }}{% endif %}"
                                                         >
                                                 </div>
                                         </div>
@@ -123,7 +150,7 @@
                                                                 name="phone"
                                                                 placeholder="+40712345678"
                                                                 pattern="\+[0-9]+"
-                                                                value="{% if user_profile.phone %}{{ user_profile.phone }}{% endif %}"
+                                                                value="{% if card_profile.phone %}{{ card_profile.phone }}{% endif %}"
                                                         > <br>
                                                         <small>Format: +40712345678</small>
                                                 </div>
@@ -145,7 +172,7 @@
                                                                 id="id_website"
                                                                 type="url"
                                                                 pattern="https://.*"
-                                                                value="{% if user_profile.website %}{{ user_profile.website }}{% endif %}"
+                                                                value="{% if card_profile.website %}{{ card_profile.website }}{% endif %}"
                                                         >
                                                 </div>
                                         </div>
@@ -160,7 +187,7 @@
                                                                 id="id_facebook_url"
                                                                 type="url"
                                                                 pattern="https://.*"
-                                                                value="{% if user_profile.facebook_url %}{{ user_profile.facebook_url }}{% endif %}"
+                                                                value="{% if card_profile.facebook_url %}{{ card_profile.facebook_url }}{% endif %}"
                                                         >
                                                 </div>
                                         </div>
@@ -175,7 +202,7 @@
                                                                 id="id_linkedin_url"
                                                                 type="url"
                                                                 pattern="https://.*"
-                                                                value="{% if user_profile.linkedin_url %}{{ user_profile.linkedin_url }}{% endif %}"
+                                                                value="{% if card_profile.linkedin_url %}{{ card_profile.linkedin_url }}{% endif %}"
                                                         >
                                                 </div>
                                         </div>
@@ -194,7 +221,7 @@
                                                                 id="id_instagram_url"
                                                                 type="url"
                                                                 pattern="https://.*"
-                                                                value="{% if user_profile.instagram_url %}{{ user_profile.instagram_url }}{% endif %}"
+                                                                value="{% if card_profile.instagram_url %}{{ card_profile.instagram_url }}{% endif %}"
                                                         >
                                                 </div>
                                         </div>
@@ -209,7 +236,7 @@
                                                                 id="id_pinterest_url"
                                                                 type="url"
                                                                 pattern="https://.*"
-                                                                value="{% if user_profile.pinterest_url %}{{ user_profile.pinterest_url }}{% endif %}"
+                                                                value="{% if card_profile.pinterest_url %}{{ card_profile.pinterest_url }}{% endif %}"
                                                         >
                                                 </div>
                                         </div>
@@ -224,7 +251,7 @@
                                                                 id="id_twitter_url"
                                                                 type="url"
                                                                 pattern="https://.*"
-                                                                value="{% if user_profile.twitter_url %}{{ user_profile.twitter_url }}{% endif %}"
+                                                                value="{% if card_profile.twitter_url %}{{ card_profile.twitter_url }}{% endif %}"
                                                         >
                                                 </div>
                                         </div>
@@ -243,7 +270,7 @@
                                                                 id="id_youtube_url"
                                                                 type="url"
                                                                 pattern="https://.*"
-                                                                value="{% if user_profile.youtube_url %}{{ user_profile.youtube_url }}{% endif %}"
+                                                                value="{% if card_profile.youtube_url %}{{ card_profile.youtube_url }}{% endif %}"
                                                         >
                                                 </div>
                                         </div>
@@ -258,7 +285,7 @@
                                                                 id="id_snapchat_url"
                                                                 type="url"
                                                                 pattern="https://.*"
-                                                                value="{% if user_profile.snapchat_url %}{{ user_profile.snapchat_url }}{% endif %}"
+                                                                value="{% if card_profile.snapchat_url %}{{ card_profile.snapchat_url }}{% endif %}"
                                                         >
                                                 </div>
                                         </div>
@@ -273,7 +300,7 @@
                                                                 id="id_whatsapp_url"
                                                                 type="url"
                                                                 pattern="https://.*"
-                                                                value="{% if user_profile.whatsapp_url %}{{ user_profile.whatsapp_url }}{% endif %}"
+                                                                value="{% if card_profile.whatsapp_url %}{{ card_profile.whatsapp_url }}{% endif %}"
                                                         >
                                                 </div>
                                         </div>
@@ -292,7 +319,7 @@
                                                                 id="id_tiktok_url"
                                                                 type="url"
                                                                 pattern="https://.*"
-                                                                value="{% if user_profile.tiktok_url %}{{ user_profile.tiktok_url }}{% endif %}"
+                                                                value="{% if card_profile.tiktok_url %}{{ card_profile.tiktok_url }}{% endif %}"
                                                         >
                                                 </div>
                                         </div>
@@ -307,7 +334,7 @@
                                                                 id="id_telegram_url"
                                                                 type="url"
                                                                 pattern="https://.*"
-                                                                value="{% if user_profile.telegram_url %}{{ user_profile.telegram_url }}{% endif %}"
+                                                                value="{% if card_profile.telegram_url %}{{ card_profile.telegram_url }}{% endif %}"
                                                         >
                                                 </div>
                                         </div>
@@ -322,7 +349,7 @@
                                                                 id="id_skype_url"
                                                                 type="url"
                                                                 pattern="https://.*"
-                                                                value="{% if user_profile.skype_url %}{{ user_profile.skype_url }}{% endif %}"
+                                                                value="{% if card_profile.skype_url %}{{ card_profile.skype_url }}{% endif %}"
                                                         >
                                                 </div>
                                         </div>
@@ -341,7 +368,7 @@
                                                                 id="id_github_url"
                                                                 type="url"
                                                                 pattern="https://.*"
-                                                                value="{% if user_profile.github_url %}{{ user_profile.github_url }}{% endif %}"
+                                                                value="{% if card_profile.github_url %}{{ card_profile.github_url }}{% endif %}"
                                                         >
                                                 </div>
                                         </div>
@@ -356,7 +383,21 @@
                                                                 id="id_gitlab_url"
                                                                 type="url"
                                                                 pattern="https://.*"
-                                                                value="{% if user_profile.gitlab_url %}{{ user_profile.gitlab_url }}{% endif %}"
+                                                                value="{% if card_profile.gitlab_url %}{{ card_profile.gitlab_url }}{% endif %}"
+                                                        >
+                                                </div>
+                                        </div>
+
+                                        <div class="field">
+                                                <label>Custom card name:</label>
+
+                                                <div class="control">
+                                                        <input
+                                                                class="input"
+                                                                name="custom_card_name"
+                                                                id="id_custom_card_name"
+                                                                type="text"
+                                                                value="{{ card_profile.custom_card_name }}"
                                                         >
                                                 </div>
                                         </div>

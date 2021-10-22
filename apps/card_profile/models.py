@@ -21,21 +21,24 @@ class Card(models.Model):
         (FEMALE, 'F'),
     )
 
-    page_title = models.CharField(max_length=255)
+    card_name = models.CharField(max_length=255, unique=True, blank=False, null=False)
+    custom_card_name = models.CharField(max_length=255, unique=True, blank=False, null=False)
 
-    card_model = models.CharField(max_length=255, blank=True, null=True)
+    page_title = models.CharField(max_length=255, blank=False, null=False)
+
+    card_model = models.CharField(max_length=255, blank=False, null=False)
 
     avatar_image = models.ImageField(upload_to=path_and_rename, height_field=None, width_field=None,
                                max_length=255, blank=True, null=True)
     bg_image = models.ImageField(upload_to=path_and_rename, height_field=None, width_field=None,
                                max_length=255, blank=True, null=True)
 
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
-    gender = models.CharField(max_length=1, choices=CHOICES_GENDER)
+    first_name = models.CharField(max_length=255, blank=False, null=False)
+    last_name = models.CharField(max_length=255, blank=False, null=False)
+    gender = models.CharField(max_length=1, choices=CHOICES_GENDER, blank=False, null=False)
     title = models.CharField(max_length=255, blank=True, null=True)
     company = models.CharField(max_length=255, blank=True, null=True)
-    email = models.EmailField(max_length=254, unique=True)
+    email = models.EmailField(max_length=254, blank=True, null=True)
     phone = models.CharField(max_length=255, blank=True, null=True)
     website = models.URLField(max_length=200, blank=True, null=True)
     facebook_url = models.URLField(max_length=200, blank=True, null=True)
@@ -57,5 +60,4 @@ class Card(models.Model):
     changed_at = models.DateTimeField(auto_now=True, blank=True, null=True)
 
     def __str__(self):
-        card_name = f"card_{self.first_name}_{self.last_name}"
-        return card_name
+        return self.card_name

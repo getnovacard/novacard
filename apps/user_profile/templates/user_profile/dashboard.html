@@ -2,8 +2,11 @@
 
 {% block content %}
     {% if cards.count > 0 %}
+        <h1 class="subtitle has-text-centered">My cards</h1>
         {% for card in cards %}
-            <h1 class="subtitle has-text-centered">Card: {{ card.first_name }} {{ card.last_name }}</h1>
+            <a href="{% url 'view_card' card.id %}">
+                <h1 class="subtitle has-text-centered">Card: {{ card.first_name }} {{ card.last_name }}</h1>
+            </a>
         {% endfor %}
     {% else %}
         <h1 class="subtitle has-text-centered">You have not created your card profile. To do so, please click the button below.</h1>
