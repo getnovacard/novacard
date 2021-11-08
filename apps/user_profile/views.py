@@ -4,7 +4,7 @@ import logging
 
 from django.contrib.auth.models import User
 from .forms import EditUserProfile
-from apps.card_profile.models import Card
+from apps.card_profile.models import CardProfile
 
 
 logger =logging.getLogger('novacard_info')
@@ -13,7 +13,7 @@ logger =logging.getLogger('novacard_info')
 @login_required
 def dashboard(request):
     logger.info(f"{request.user} - access dashboard page")
-    cards = Card.objects.filter(created_by=request.user.id)
+    cards = CardProfile.objects.filter(created_by=request.user.id)
    
     return render(request, 'user_profile/dashboard.html', {'cards': cards, "user": request.user.id})
 

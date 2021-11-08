@@ -14,6 +14,6 @@ urlpatterns = [
     path('logout/', views.LogoutView.as_view(), name='logout'),
     path('login/', views.LoginView.as_view(template_name='core/login.html'), name='login'),
     path('admin/', admin.site.urls),
-    path('cards/', include('apps.card_profile.urls')),
+    path('card-profile/', include('apps.card_profile.urls')),
     path('userprofile/', include('apps.user_profile.urls')),
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

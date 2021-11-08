@@ -4,12 +4,14 @@
     {% if cards.count > 0 %}
         <h1 class="subtitle has-text-centered">My cards</h1>
         {% for card in cards %}
-            <a href="{% url 'view_card' card.id %}">
+            <a href="{% url 'view_card_profile' card.id %}">
                 <h1 class="subtitle has-text-centered">Card: {{ card.first_name }} {{ card.last_name }}</h1>
             </a>
         {% endfor %}
+        <br>
+        <h1 class="has-text-centered"><a href="{% url 'create_card_profile' %}" class="button is-success">Create new card profile</a></h1>
     {% else %}
         <h1 class="subtitle has-text-centered">You have not created your card profile. To do so, please click the button below.</h1>
-        <h1 class="has-text-centered"><a href="" class="button is-success">Create card</a></h1>
+        <h1 class="has-text-centered"><a href="{% url 'create_card_profile' %}" class="button is-success">Create card profile</a></h1>
     {% endif %}
 {% endblock %}

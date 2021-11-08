@@ -32,9 +32,9 @@
                 <b>Gitlab URL: </b>{% if card_profile.gitlab_url %}{{ card_profile.gitlab_url }}{% else %}N/A{% endif %}<br>
 
                 <b>Card name: </b>{{ card_profile.card_name }}<br>
-                <b>Card custom name: </b>{{ card_profile.custom_card_name }}<br>
                 <br>
-                <a href="{% url 'edit_card' card_profile.id %}" class="button is-success">Edit card</a>
+                <a href="{% url 'edit_card_profile' card_profile.id %}" class="button is-success">Edit card</a>
+                <a href="{% url 'delete_card_profile' card_profile.id %}" class="button is-danger">Delete card</a>
         {% endif %}
 {% endblock %}
 

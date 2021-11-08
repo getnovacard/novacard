@@ -1,8 +1,10 @@
 from django.urls import path
 
-from .views import view_card, edit_card
+from .views import view_card_profile, edit_card_profile, delete_card_profile, create_card_profile
 
 urlpatterns = [
-    path('<int:card_id>/', view_card, name='view_card'),
-    path('<int:card_id>/edit/', edit_card, name='edit_card'),
+    path('<int:card_profile_id>/', view_card_profile, name='view_card_profile'),
+    path('<int:card_profile_id>/edit/', edit_card_profile, name='edit_card_profile'),
+    path('<int:card_profile_id>/delete/', delete_card_profile, name='delete_card_profile'),
+    path('create/', create_card_profile, name='create_card_profile'),
 ]

@@ -4,7 +4,7 @@ import os
 from uuid import uuid4
 
 
-class Card(models.Model):
+class CardProfile(models.Model):
 
     def path_and_rename(self, filename):
         upload_to = ''
@@ -22,8 +22,7 @@ class Card(models.Model):
     )
 
     card_name = models.CharField(max_length=255, unique=True, blank=False, null=False)
-    custom_card_name = models.CharField(max_length=255, unique=True, blank=False, null=False)
-
+ 
     page_title = models.CharField(max_length=255, blank=False, null=False)
 
     card_model = models.CharField(max_length=255, blank=False, null=False)

@@ -1,10 +1,10 @@
 from django import forms
-from .models import Card
+from .models import CardProfile
 
 
 class EditProfile(forms.ModelForm):
     class Meta:
-        model = Card
+        model = CardProfile
         fields = [
             'avatar_image',
             'bg_image',
@@ -29,5 +29,5 @@ class EditProfile(forms.ModelForm):
             'skype_url',
             'github_url',
             'gitlab_url',
-            'custom_card_name',
+            'card_name',
         ]
