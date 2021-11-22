@@ -6,3 +6,4 @@ md5sum
 __pycache__/
 migrations/
 log/
+.tmp/
