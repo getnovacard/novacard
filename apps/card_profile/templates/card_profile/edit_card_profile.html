@@ -2,7 +2,7 @@
 
 {% block content %}
         {% if request.user.is_authenticated %}
-                <h1 class="title">Edit profile {{ card_profile.username }}</h1>
+                <h1 class="title">Edit profile {{ card_profile.card_profile_name }}</h1>
 
                 <form method="post" action="." enctype="multipart/form-data" >
                         {% csrf_token %}
@@ -17,6 +17,21 @@
                                         {% endfor %}
                                 {% endfor %}
                         {% endif %}
+
+                        <div class="field">
+                                <label>Template:</label>
+            
+                                <div class="control">
+                                    <div class="select">
+                                        <select name="template">
+                                            {% for one_template in templates %}
+                                                <option value="{{ one_template.id }}">{{ one_template.template_name }}</option>
+                                            {% endfor %}
+
+                                        </select>
+                                    </div>
+                                </div>
+                        </div>
 
                         <div class="field">
                                 <label>Avatar:</label>{{ card_profile.avatar_image }} <br>
@@ -394,10 +409,10 @@
                                                 <div class="control">
                                                         <input
                                                                 class="input"
-                                                                name="card_name"
-                                                                id="id_card_name"
+                                                                name="card_profile_name"
+                                                                id="id_card_profile_name"
                                                                 type="text"
-                                                                value="{{ card_profile.card_name }}"
+                                                                value="{{ card_profile.card_profile_name }}"
                                                         >
                                                 </div>
                                         </div>

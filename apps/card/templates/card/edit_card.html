@@ -1,0 +1,63 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+        {% if request.user.is_authenticated %}
+                <h1 class="title">Edit card {{ card.card_name }}</h1>
+
+                <div class="columns">
+                    <div class="column is-one-quarter">
+                        <form method="post" action=".">
+                                {% csrf_token %}
+
+                                <!-- Error notifications -->
+                                {% if form.errors %}
+                                        {% for field in form %}
+                                                {% for error in field.errors %}
+                                                        <div class="notification is-danger">
+                                                                {{ field.label }}: <strong>{{ error|escape }}</strong>
+                                                        </div>
+                                                {% endfor %}
+                                        {% endfor %}
+                                {% endif %}
+
+
+                                <div class="field">
+                                        <label>Card name:</label>
+
+                                        <div class="control">
+                                                <input
+                                                        class="input"
+                                                        type="text"
+                                                        name="card_name"
+                                                        id="id_card_name"
+                                                        value="{{ card.card_name }}"
+                                                >
+                                        </div>
+                                </div>
+                                <br>
+
+                                <div class="field">
+                                        <label>Active profile:</label>
+                    
+                                        <div class="control">
+                                            <div class="select">
+                                                <select name="active_profile">
+                                                    {% for card_profile in card_profiles %}
+                                                        <option value="{{ card_profile.id }}" {% if card_profile.id == card.active_profile.id %}selected{% endif %}>{{ card_profile.card_profile_name }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                </div>
+                                <br>
+
+                                <div class="field">
+                                        <div class="control">
+                                            <button class="button is-success" type="submit">Save changes</button>
+                                        </div>
+                                </div>
+                        </form>
+                    </div>
+                </div>
+        {% endif %}
+{% endblock %}

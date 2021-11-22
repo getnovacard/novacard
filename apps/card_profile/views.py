@@ -1,10 +1,15 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.http import HttpResponse
 import logging
+import mimetypes
 
 from .models import CardProfile
 from .forms import EditProfile
+from apps.template.models import Template
+from modules.utils import generate_vcf
+from project.settings import MEDIA_ROOT
 
 
 logger =logging.getLogger('novacard_info')
@@ -23,6 +28,7 @@ def view_card_profile(request, card_profile_id):
 @login_required
 def edit_card_profile(request, card_profile_id):
     card_profile = get_object_or_404(CardProfile, pk=card_profile_id)
+    templates = Template.objects.all()
 
     if request.user.id == card_profile.created_by.id:
         if request.method == 'POST':
@@ -34,13 +40,15 @@ def edit_card_profile(request, card_profile_id):
                 profile_change.save()
                 logger.info(f"{request.user} - updated card data.")
 
+                return_message = generate_vcf(card_profile)
+
                 return redirect('view_card_profile', card_profile_id=card_profile_id)
 
         else:
             form = EditProfile()
             logger.info(f"{request.user} - edit card profile {card_profile.id}")
 
-        return render(request, 'card_profile/edit_card_profile.html', {'card_profile': card_profile, 'form': form})
+        return render(request, 'card_profile/edit_card_profile.html', {'card_profile': card_profile, 'form': form, 'templates': templates})
     
     else:
         return render(request, 'core/message.html', {'message': 'You are not authorized to view this information'})
@@ -48,6 +56,8 @@ def edit_card_profile(request, card_profile_id):
 
 @login_required
 def create_card_profile(request):
+    templates = Template.objects.all()
+
     if request.method == 'POST':
         form = EditProfile(request.POST, request.FILES)
 
@@ -59,13 +69,17 @@ def create_card_profile(request):
             new_card.save()
             logger.info(f"{request.user} - created card profile.")
 
+            new_profile_id = new_card.id
+            card_profile = get_object_or_404(CardProfile, pk=new_profile_id)
+            generate_vcf(card_profile)
+
             return redirect('dashboard')
 
     else:
         form = EditProfile()
         logger.info(f"{request.user} - create card profile")
 
-    return render(request, 'card_profile/create_card_profile.html', {'form': form})
+    return render(request, 'card_profile/create_card_profile.html', {'form': form, 'templates': templates})
 
 
 @login_required
@@ -76,3 +90,16 @@ def delete_card_profile(request, card_profile_id):
     messages.success(request, 'The card profile was deleted successfully!')
 
     return redirect('dashboard')
+
+
+def download_vcard(request, card_profile_id):
+    card_profile = CardProfile.objects.get(pk=card_profile_id)
+    vcard_filepath = f"{MEDIA_ROOT}/{card_profile.vcard}"
+    vcard_filename = card_profile.vcard
+
+    f = open(vcard_filepath, "r")
+    mime_type, _ = mimetypes.guess_type(vcard_filepath)
+    response = HttpResponse(f, content_type=mime_type)
+    response['Content-Disposition'] = "attachment; filename=vcard.vcf"
+
+    return response

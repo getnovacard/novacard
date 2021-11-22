@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from apps.template.models import Template
 from django.db import models
 import os
 from uuid import uuid4
@@ -21,11 +22,20 @@ class CardProfile(models.Model):
         (FEMALE, 'F'),
     )
 
-    card_name = models.CharField(max_length=255, unique=True, blank=False, null=False)
+    TRUE = '1'
+    FALSE = '0'
+
+    CHOICES_ACTIVE = (
+        (TRUE, '1'),
+        (FALSE, '0'),
+    )
+
+    card_profile_name = models.CharField(max_length=255, unique=True, blank=False, null=False)
+
+    template = models.ForeignKey(Template, related_name='card_profile_template', on_delete=models.CASCADE)
+    vcard = models.CharField(max_length=255, blank=False, null=False)
  
     page_title = models.CharField(max_length=255, blank=False, null=False)
-
-    card_model = models.CharField(max_length=255, blank=False, null=False)
 
     avatar_image = models.ImageField(upload_to=path_and_rename, height_field=None, width_field=None,
                                max_length=255, blank=True, null=True)
@@ -59,4 +69,4 @@ class CardProfile(models.Model):
     changed_at = models.DateTimeField(auto_now=True, blank=True, null=True)
 
     def __str__(self):
-        return self.card_name
+        return self.card_profile_name

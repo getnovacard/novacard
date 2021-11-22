@@ -29,5 +29,6 @@ class EditProfile(forms.ModelForm):
             'skype_url',
             'github_url',
             'gitlab_url',
-            'card_name',
+            'card_profile_name',
+            'template',
         ]

@@ -19,6 +19,21 @@
                         {% endif %}
 
                         <div class="field">
+                                <label>Template:</label>
+            
+                                <div class="control">
+                                    <div class="select">
+                                        <select name="template">
+                                            {% for one_template in templates %}
+                                                <option value="{{ one_template.id }}">{{ one_template.template_name }}</option>
+                                            {% endfor %}
+
+                                        </select>
+                                    </div>
+                                </div>
+                        </div>
+
+                        <div class="field">
                                 <label>Avatar:</label>{{ card_profile.avatar_image }} <br>
 
                                 <div class="control">
@@ -389,15 +404,15 @@
                                         </div>
 
                                         <div class="field">
-                                                <label>Card name:</label>
+                                                <label>Card profile name:</label>
 
                                                 <div class="control">
                                                         <input
                                                                 class="input"
-                                                                name="card_name"
-                                                                id="id_card_name"
+                                                                name="card_profile_name"
+                                                                id="id_card_profile_name"
                                                                 type="text"
-                                                                value="{{ card_profile.card_name }}"
+                                                                value="{{ card_profile.card_profile_name }}"
                                                         >
                                                 </div>
                                         </div>

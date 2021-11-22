@@ -31,6 +31,8 @@ INSTALLED_APPS = [
     'apps.core',
     'apps.card_profile',
     'apps.user_profile',
+    'apps.card',
+    'apps.template'
 ]
 
 MIDDLEWARE = [

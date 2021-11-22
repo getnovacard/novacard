@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- Title -->
-        <title>Nova Card Testing App</title>
+        <title>Nova Card Profile Manager</title>
 
         <!-- Styles -->
         {% load static %}
@@ -32,7 +32,7 @@
                     </a>
                 </div>
             
-                <p class="navbar-item"><small class='is-subtitle'>Welcome {{ user.get_username }}</small></p>
+                <p class="navbar-item"><small class='is-subtitle'>Welcome {{ user.username }}</small></p>
             {% else %}
                 <div class="navbar-brand">
                     <a href="{% url 'frontpage' %}" class="navbar-item">

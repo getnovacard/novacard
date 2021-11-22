@@ -1,0 +1,141 @@
+{% extends 'template/base_template.html' %}
+
+{% load static %}
+
+{% block title %}
+    <title>{{ card_profile.page_title }}</title>
+{% endblock %}  
+
+
+{% block content %}
+    <body style="
+        height: 100%;
+        background-color: #ffffff;
+        background-image: url('{% static 'template/template1/css/images/overlay.png' %}'), -moz-linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35)), url('{% static 'template/template1/images/bg.jpg' %}');
+        background-image: url('{% static 'template/template1/css/images/overlay.png' %}'), -webkit-linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35)), url('{% static 'template/template1/images/bg.jpg' %}');
+        background-image: url('{% static 'template/template1/css/images/overlay.png' %}'), -ms-linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35)), url('{% static 'template/template1/images/bg.jpg' %}');
+        background-image: url('{% static 'template/template1/css/images/overlay.png' %}'), linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35)), url('{% static 'template/template1/images/bg.jpg' %}');
+        background-repeat: repeat,			no-repeat,			no-repeat;
+        background-size: 100px 100px, cover,				cover;
+        background-position: top left,		center center,		bottom center;
+        background-attachment: fixed,			fixed,				fixed;
+    ">
+        <!-- Wrapper -->
+        <div id="wrapper">
+            <!-- Main -->
+            <section id="main">
+                <header>
+                    {% if card_profile.avatar_image %}
+                        <span class="avatar"><img src="/media/{{ card_profile.avatar_image }}" alt="" /></span>
+                    {% else %}
+                        <span class="avatar"><img src="{% static 'template/template1/images/avatar-placeholder.jpeg' %}" alt="" /></span>
+                    {% endif %}
+                    <h1>{{ card_profile.first_name }} {{ card_profile.last_name }}</h1>
+                    
+                    {% if card_profile.title %}
+                        <p class="occupation">{{ card_profile.title }}</p>
+                    {% endif %}
+                    
+                    {% if card_profile.company %}
+                        <p class="company-name">{{ card_profile.company }}</p>
+                    {% endif %}
+                </header>
+
+                <footer>
+                    <ul class="icons" id="contacts-list">
+                        {% if card_profile.email %}
+                            <li><a href="mailto:{{ card_profile.email }}" class="far fa-envelope" target="_blank">Email</a></li>
+                        {% endif %}
+                        
+                        {% if card_profile.phone %}
+                            <li><a href="tel:{{ card_profile.phone }}" class="fas fa-phone" target="_blank">Phone</a></li>
+                        {% endif %}
+                
+                        {% if card_profile.website %} 
+                            <li><a href="{{ card_profile.website }}" class="fab fa-chrome" target="_blank">Website</a></li>
+                        {% endif %}
+                        
+                        {% if card_profile.facebook_url %}
+                            <li><a href="{{ card_profile.facebook_url }}" class="fa-facebook" target="_blank">Facebook</a></li>
+                        {% endif %}
+                        
+                        {% if card_profile.linkedin_url %}
+                            <li><a href="{{ card_profile.linkedin_url }}" class="fa-linkedin" target="_blank">LinkedIn</a></li>
+                        {% endif %}
+                
+                        {% if card_profile.instagram_url %}
+                            <li><a href="{{ card_profile.instagram_url }}" class="fab fa-instagram" target="_blank">Instagram</a></li>
+                        {% endif %}
+                
+                        {% if card_profile.pinterest_url %}
+                            <li><a href="{{ card_profile.pinterest_url }}" class="fab fa-pinterest" target="_blank">Pinterest</a></li>
+                        {% endif %}
+                
+                        {% if card_profile.twitter_url %}
+                            <li><a href="{{ card_profile.twitter_url }}" class="fab fa-twitter" target="_blank">Twitter</a></li>
+                        {% endif %}
+                
+                        {% if card_profile.youtube_url %}
+                            <li><a href="{{ card_profile.youtube_url }}" class="fab fa-youtube" target="_blank">Youtube</a></li>
+                        {% endif %}
+                
+                        {% if card_profile.snapchat_url %}
+                            <li><a href="{{ card_profile.snapchat_url }}" class="fab fa-snapchat" target="_blank">Snapchat</a></li>
+                        {% endif %}
+                
+                        {% if card_profile.whatsapp_url %}
+                            <li><a href="{{ card_profile.whatsapp_url }}" class="fab fa-whatsapp" target="_blank">Whatsapp</a></li>
+                        {% endif %}
+                
+                        {% if card_profile.tiktok_url %}
+                            <li><a href="{{ card_profile.tiktok_url }}" class="fab fa-tiktok" target="_blank">Tiktok</a></li>
+                        {% endif %}
+                
+                        {% if card_profile.telegram_url %}
+                            <li><a href="{{ card_profile.telegram_url }}" class="fab fa-telegram-plane" target="_blank">Telegram</a></li>
+                        {% endif %}
+                
+                        {% if card_profile.skype_url %}
+                            <li><a href="{{ card_profile.skype_url }}" class="fab fa-skype" target="_blank">Skype</a></li>
+                        {% endif %}
+                
+                        {% if card_profile.github_url %}
+                            <li><a href="{{ card_profile.github_url }}" class="fab fa-github" target="_blank">Github</a></li>
+                        {% endif %}
+                
+                        {% if card_profile.gitlab_url %}
+                            <li><a href="{{ card_profile.gitlab_url }}" class="fab fa-gitlab" target="_blank">Gitlab</a></li>
+                        {% endif %}
+                
+                    </ul>
+                
+                    <p>
+                        <a id="download-vcf" href="{% url 'download_vcard' card_profile.id %}" target="_blank" download>
+                            Salveaza Contact
+                        </a>
+                    </p>
+                </footer>   
+            </section>
+
+            <!-- Footer -->
+            <footer id="footer">
+                <ul class="copyright">
+                    <li>Powered by: <a href="http://novacard.ro" target="_blank">Novacard.ro</a></li>   
+                </ul>
+            </footer>
+        </div>  
+        <!-- End Main content -->
+
+        <!-- Scripts -->
+        <!--[if lte IE 8]><script src="{{ site.url }}{{ site.baseurl }}/assets/js/respond.min.js"></script><![endif]-->
+        <script>
+            if ('addEventListener' in window) {
+                window.addEventListener('load', function() { document.body.className = document.body.className.replace(/\bis-loading\b/, ''); });
+                document.body.className += (navigator.userAgent.match(/(MSIE|rv:11\.0)/) ? ' is-ie' : '');
+            }
+        </script>
+    </body>
+{% endblock %}
+
+
+
