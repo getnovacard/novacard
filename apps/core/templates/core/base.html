@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- Title -->
-        <title>Nova Card Testing App</title>
+        <title>Nova Card Profile Manager</title>
 
         <!-- Styles -->
         {% load static %}
@@ -16,16 +16,30 @@
           
         <!-- Reference for installed Font Awesome Free package's files -->
         <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+
+        <!-- Favicon -->
+        <link rel="shortcut icon" type="image/png" href="{% static 'core/branding/favicon-black.png' %}"/>
     </head>
 
     <body>
         <!-- Navbar -->
         <nav class="navbar is-light">
-            <div class="navbar-brand">
-                <a href="{% url 'frontpage' %}" class="navbar-item"><strong>Nova Card</strong></a>
-            </div>
-            {% if user.is_authenticated %}
-                <p class="navbar-item"><small class='is-subtitle'>Welcome {{ user.get_username }}</small></p>
+            {% if request.user.is_authenticated %}
+                <div class="navbar-brand">
+                    <a href="{% url 'dashboard' %}" class="navbar-item">
+                        <img id="navbar_logo" src="{% static 'core/branding/logo-black.png' %}" width="30" height="30">
+                        <strong>Nova Card</strong>
+                    </a>
+                </div>
+            
+                <p class="navbar-item"><small class='is-subtitle'>Welcome {{ user.username }}</small></p>
+            {% else %}
+                <div class="navbar-brand">
+                    <a href="{% url 'frontpage' %}" class="navbar-item">
+                        <img id="navbar_logo" src="{% static 'core/branding/logo-black.png' %}" width="30" height="30">
+                        <strong>Nova Card</strong>
+                    </a>
+                </div>
             {% endif %}
 
             <div class="navbar-menu">
@@ -33,10 +47,13 @@
                     <div class="navbar-item">
                         <div class="buttons">
                             {% if request.user.is_authenticated %}
-                                <a href="{% url 'profiles_list' %}" class="button is-success">Update profiles</a>
+                                <a id="user-icon" href="{% url 'view_userprofile' %}" class="navbar-item"><i class="fas fa-user-circle fa-2x"></i></a>
+                                {% if request.user.is_superuser %}
+                                    <a href="{% url 'admin:index' %}" class="button is-success">Admin</a>
+                                {% endif %}
                                 <a href="{% url 'logout' %}" class="button is-danger">Log out</a>
                             {% else %}
-                                <a href="{% url 'login' %}" class="button is-light">Log in</a>
+                                <a href="{% url 'login' %}" class="button is-success">Log in</a>
                             {% endif %}
                         </div>
                     </div>

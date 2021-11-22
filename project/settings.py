@@ -4,11 +4,6 @@ import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-APPLICATIONS_DIR = Path(__file__).parents[3]
-SHARED_SPACE_DIR = os.path.join(APPLICATIONS_DIR, "shared_space/")
-TEMP_DIR = os.path.join(SHARED_SPACE_DIR, "temp/")
-TASKS_DIR = os.path.join(SHARED_SPACE_DIR, "tasks/")
-LOGGING_DIR = os.path.join(SHARED_SPACE_DIR, "log/")
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '+16a2x$b1$h1wv2tw#lcy-%wwvf*7b$j%vy-(-$qoc@gp@l7r6'
@@ -19,8 +14,9 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'frontpage'
+LOGIN_REDIRECT_URL = 'dashboard'
 LOGOUT_REDIRECT_URL = 'frontpage'
+
 
 # Application definition
 
@@ -31,10 +27,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'fontawesomefree',
     'apps.core',
     'apps.card_profile',
-    'fontawesomefree',
-    'django_celery_results',
+    'apps.user_profile',
+    'apps.card',
+    'apps.template'
 ]
 
 MIDDLEWARE = [
@@ -111,6 +109,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
@@ -121,15 +121,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL='/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# CELERY SETTINGS
-CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
-CELERY_ACCEPT_CONTENT = ['application/json']
-CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_TIMEZONE = 'Europe/Bucharest'
-CELERY_RESULT_BACKEND = 'django-db'
+LOGGING_DIR = os.path.join(BASE_DIR, "log/")
 
 # LOGGING SETTINGS
 LOGGING = {
@@ -168,5 +160,3 @@ LOGGING = {
         },
     },
 }
-
-CELERYD_HIJACK_ROOT_LOGGER = False

@@ -1,0 +1,429 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+        {% if request.user.is_authenticated %}
+                <h1 class="title">Edit profile {{ card_profile.card_profile_name }}</h1>
+
+                <form method="post" action="." enctype="multipart/form-data" >
+                        {% csrf_token %}
+
+                        <!-- Error notifications -->
+                        {% if form.errors %}
+                                {% for field in form %}
+                                        {% for error in field.errors %}
+                                                <div class="notification is-danger">
+                                                        {{ field.label }}: <strong>{{ error|escape }}</strong>
+                                                </div>
+                                        {% endfor %}
+                                {% endfor %}
+                        {% endif %}
+
+                        <div class="field">
+                                <label>Template:</label>
+            
+                                <div class="control">
+                                    <div class="select">
+                                        <select name="template">
+                                            {% for one_template in templates %}
+                                                <option value="{{ one_template.id }}">{{ one_template.template_name }}</option>
+                                            {% endfor %}
+
+                                        </select>
+                                    </div>
+                                </div>
+                        </div>
+
+                        <div class="field">
+                                <label>Avatar:</label>{{ card_profile.avatar_image }} <br>
+
+                                <div class="control">
+                                        <input
+                                                class="input"
+                                                name="avatar_image"
+                                                id="id_avatar_image"
+                                                type="file"
+                                                accept="image/png, image/jpeg"
+                                        >
+                                </div>
+                        </div>
+
+                        <div class="field">
+                                <label>Background:</label>{{ card_profile.bg_image }} <br>
+
+                                <div class="control">
+                                        <input
+                                                class="input"
+                                                name="bg_image"
+                                                id="id_bg_image"
+                                                type="file"
+                                                accept="image/png, image/jpeg"
+                                        >
+                                </div>
+                        </div>
+
+                        <div class="field">
+                                <label>Gender:</label>
+            
+                                <div class="control">
+                                    <div class="select">
+                                        <select name="gender">
+                                            <option value="M" {% if card_profile.gender == 'M' %}selected{% endif %}>M</option>
+                                            <option value="F" {% if card_profile.gender == 'F' %}selected{% endif %}>F</option>
+                                        </select>
+                                    </div>
+                                </div>
+                        </div>
+
+                        <div class="field is-horizontal">
+                                <div class="field-body">
+                                        <div class="field">
+                                                <label>First name:</label>
+
+                                                <div class="control">
+                                                        <input
+                                                                class="input"
+                                                                type="text"
+                                                                name="first_name"
+                                                                id="id_first_name"
+                                                                value="{% if card_profile.first_name %}{{ card_profile.first_name }}{% endif %}"
+                                                        >
+                                                </div>
+                                        </div>
+
+                                        <div class="field">
+                                                <label>Last name:</label>
+
+                                                <div class="control">
+                                                        <input
+                                                                class="input"
+                                                                type="text"
+                                                                name="last_name"
+                                                                id="id_last_name"
+                                                                value="{% if card_profile.last_name %}{{ card_profile.last_name }}{% endif %}"
+                                                        >
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+
+                         <div class="field is-horizontal">
+                                <div class="field-body">
+                                        <div class="field">
+                                                <label>Title:</label>
+
+                                                <div class="control">
+                                                        <input
+                                                                class="input"
+                                                                type="text"
+                                                                name="title"
+                                                                id="id_title"
+                                                                value="{% if card_profile.title %}{{ card_profile.title }}{% endif %}"
+                                                        >
+                                                </div>
+                                        </div>
+
+                                        <div class="field">
+                                                <label>Company:</label>
+
+                                                <div class="control">
+                                                        <input
+                                                                class="input"
+                                                                type="text"
+                                                                name="company"
+                                                                id="id_company"
+                                                                value="{% if card_profile.company %}{{ card_profile.company }}{% endif %}"
+                                                        >
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+
+                         <div class="field is-horizontal">
+                                <div class="field-body">
+                                        <div class="field">
+                                                <label>Email:</label>
+
+                                                <div class="control">
+                                                        <input
+                                                                class="input"
+                                                                type="email"
+                                                                name="email"
+                                                                id="id_email"
+                                                                value="{% if card_profile.email %}{{ card_profile.email }}{% endif %}"
+                                                        >
+                                                </div>
+                                        </div>
+
+                                        <div class="field">
+                                                <label>Phone:</label>
+
+                                                <div class="control">
+                                                        <input
+                                                                class="input"
+                                                                type="tel"
+                                                                id="id_phone"
+                                                                name="phone"
+                                                                placeholder="+40712345678"
+                                                                pattern="\+[0-9]+"
+                                                                value="{% if card_profile.phone %}{{ card_profile.phone }}{% endif %}"
+                                                        > <br>
+                                                        <small>Format: +40712345678</small>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+
+                        <br><b>URL format: https://a.bc</b><br><br>
+
+                         <div class="field is-horizontal">
+                                <div class="field-body">
+                                        <div class="field">
+                                                <label>Website:</label>
+
+                                                <div class="control">
+                                                        <input
+                                                                class="input"
+                                                                name="website"
+                                                                id="id_website"
+                                                                type="url"
+                                                                pattern="https://.*"
+                                                                value="{% if card_profile.website %}{{ card_profile.website }}{% endif %}"
+                                                        >
+                                                </div>
+                                        </div>
+
+                                        <div class="field">
+                                                <label>Facebook URL:</label>
+
+                                                <div class="control">
+                                                        <input
+                                                                class="input"
+                                                                name="facebook_url"
+                                                                id="id_facebook_url"
+                                                                type="url"
+                                                                pattern="https://.*"
+                                                                value="{% if card_profile.facebook_url %}{{ card_profile.facebook_url }}{% endif %}"
+                                                        >
+                                                </div>
+                                        </div>
+
+                                        <div class="field">
+                                                <label>Linkedin URL:</label>
+
+                                                <div class="control">
+                                                        <input
+                                                                class="input"
+                                                                name="linkedin_url"
+                                                                id="id_linkedin_url"
+                                                                type="url"
+                                                                pattern="https://.*"
+                                                                value="{% if card_profile.linkedin_url %}{{ card_profile.linkedin_url }}{% endif %}"
+                                                        >
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+
+                         <div class="field is-horizontal">
+                                <div class="field-body">
+                                        <div class="field">
+                                                <label>Instagram URL:</label>
+
+                                                <div class="control">
+                                                        <input
+                                                                class="input"
+                                                                name="instagram_url"
+                                                                id="id_instagram_url"
+                                                                type="url"
+                                                                pattern="https://.*"
+                                                                value="{% if card_profile.instagram_url %}{{ card_profile.instagram_url }}{% endif %}"
+                                                        >
+                                                </div>
+                                        </div>
+
+                                        <div class="field">
+                                                <label>Pinterest URL:</label>
+
+                                                <div class="control">
+                                                        <input
+                                                                class="input"
+                                                                name="pinterest_url"
+                                                                id="id_pinterest_url"
+                                                                type="url"
+                                                                pattern="https://.*"
+                                                                value="{% if card_profile.pinterest_url %}{{ card_profile.pinterest_url }}{% endif %}"
+                                                        >
+                                                </div>
+                                        </div>
+
+                                        <div class="field">
+                                                <label>Twitter URL:</label>
+
+                                                <div class="control">
+                                                        <input
+                                                                class="input"
+                                                                name="twitter_url"
+                                                                id="id_twitter_url"
+                                                                type="url"
+                                                                pattern="https://.*"
+                                                                value="{% if card_profile.twitter_url %}{{ card_profile.twitter_url }}{% endif %}"
+                                                        >
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+
+                         <div class="field is-horizontal">
+                                <div class="field-body">
+                                        <div class="field">
+                                                <label>Youtube Channel URL:</label>
+
+                                                <div class="control">
+                                                        <input
+                                                                class="input"
+                                                                name="youtube_url"
+                                                                id="id_youtube_url"
+                                                                type="url"
+                                                                pattern="https://.*"
+                                                                value="{% if card_profile.youtube_url %}{{ card_profile.youtube_url }}{% endif %}"
+                                                        >
+                                                </div>
+                                        </div>
+
+                                        <div class="field">
+                                                <label>Snapchat URL:</label>
+
+                                                <div class="control">
+                                                        <input
+                                                                class="input"
+                                                                name="snapchat_url"
+                                                                id="id_snapchat_url"
+                                                                type="url"
+                                                                pattern="https://.*"
+                                                                value="{% if card_profile.snapchat_url %}{{ card_profile.snapchat_url }}{% endif %}"
+                                                        >
+                                                </div>
+                                        </div>
+
+                                        <div class="field">
+                                                <label>Whatsapp URL:</label>
+
+                                                <div class="control">
+                                                        <input
+                                                                class="input"
+                                                                name="whatsapp_url"
+                                                                id="id_whatsapp_url"
+                                                                type="url"
+                                                                pattern="https://.*"
+                                                                value="{% if card_profile.whatsapp_url %}{{ card_profile.whatsapp_url }}{% endif %}"
+                                                        >
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+
+                         <div class="field is-horizontal">
+                                <div class="field-body">
+                                        <div class="field">
+                                                <label>Tiktok URL:</label>
+
+                                                <div class="control">
+                                                        <input
+                                                                class="input"
+                                                                name="tiktok_url"
+                                                                id="id_tiktok_url"
+                                                                type="url"
+                                                                pattern="https://.*"
+                                                                value="{% if card_profile.tiktok_url %}{{ card_profile.tiktok_url }}{% endif %}"
+                                                        >
+                                                </div>
+                                        </div>
+
+                                        <div class="field">
+                                                <label>Telegram URL:</label>
+
+                                                <div class="control">
+                                                        <input
+                                                                class="input"
+                                                                name="telegram_url"
+                                                                id="id_telegram_url"
+                                                                type="url"
+                                                                pattern="https://.*"
+                                                                value="{% if card_profile.telegram_url %}{{ card_profile.telegram_url }}{% endif %}"
+                                                        >
+                                                </div>
+                                        </div>
+
+                                        <div class="field">
+                                                <label>Skype URL:</label>
+
+                                                <div class="control">
+                                                        <input
+                                                                class="input"
+                                                                name="skype_url"
+                                                                id="id_skype_url"
+                                                                type="url"
+                                                                pattern="https://.*"
+                                                                value="{% if card_profile.skype_url %}{{ card_profile.skype_url }}{% endif %}"
+                                                        >
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+
+                         <div class="field is-horizontal">
+                                <div class="field-body">
+                                        <div class="field">
+                                                <label>Github URL:</label>
+
+                                                <div class="control">
+                                                        <input
+                                                                class="input"
+                                                                name="github_url"
+                                                                id="id_github_url"
+                                                                type="url"
+                                                                pattern="https://.*"
+                                                                value="{% if card_profile.github_url %}{{ card_profile.github_url }}{% endif %}"
+                                                        >
+                                                </div>
+                                        </div>
+
+                                        <div class="field">
+                                                <label>Gitlab URL:</label>
+
+                                                <div class="control">
+                                                        <input
+                                                                class="input"
+                                                                name="gitlab_url"
+                                                                id="id_gitlab_url"
+                                                                type="url"
+                                                                pattern="https://.*"
+                                                                value="{% if card_profile.gitlab_url %}{{ card_profile.gitlab_url }}{% endif %}"
+                                                        >
+                                                </div>
+                                        </div>
+
+                                        <div class="field">
+                                                <label>Card name:</label>
+
+                                                <div class="control">
+                                                        <input
+                                                                class="input"
+                                                                name="card_profile_name"
+                                                                id="id_card_profile_name"
+                                                                type="text"
+                                                                value="{{ card_profile.card_profile_name }}"
+                                                        >
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+
+                        <div class="field">
+                                <div class="control">
+                                    <button class="button is-success" type="submit">Save changes</button>
+                                </div>
+                        </div>
+                </form>
+        {% endif %}
+{% endblock %}

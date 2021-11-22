@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <!-- Meta -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        {% block title %}
+            <title>Nova Card</title>
+        {% endblock %}
+
+        {% load static %}
+        <!--[if lte IE 8]><script src="{% static 'template/template1/js/html5shiv.js' %}"></script><![endif]-->
+        <!--[if lte IE 9]><link rel="stylesheet" href="{% static 'template/template1/css/ie9.css' %}" /><![endif]-->
+        <!--[if lte IE 8]><link rel="stylesheet" href="{% static 'template/template1/css/ie8.css' %}" /><![endif]-->
+        <link rel="stylesheet" href="{% static 'template/template1/css/main.css' %}" />
+        <noscript><link rel="stylesheet" href="{% static 'template/template1/css/noscript.css' %}" /></noscript>
+        
+          
+        <!-- Reference for installed Font Awesome Free package's files -->
+        <script src="https://kit.fontawesome.com/f4b87501fb.js" crossorigin="anonymous"></script>
+
+        <!-- Favicon -->
+        <link rel="shortcut icon" type="image/png" href="{% static 'core/branding/favicon-black.png' %}"/>
+    </head>
+
+    {% block content %}
+    {% endblock %}
+
+</html>

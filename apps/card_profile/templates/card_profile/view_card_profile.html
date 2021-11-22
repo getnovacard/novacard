@@ -1,0 +1,45 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+        {% if request.user.is_authenticated %}
+                <b>Template: </b>{{ card_profile.template.template_name }}<br>
+                
+                <b>Avatar: </b>{% if card_profile.avatar_image %}{{ card_profile.avatar_image }}<br><br>{% else %}N/A<br> {% endif %}
+                {% if card_profile.avatar_image %}<img src="/media/{{ card_profile.avatar_image }}" alt="Avatar" width="200" height="200"><br><br>{% endif %}
+              
+                <b>Background image: </b>{% if card_profile.bg_image %}{{ card_profile.bg_image }}<br><br>{% else %}N/A<br> {% endif %}
+                {% if card_profile.bg_image %}<img src="/media/{{ card_profile.bg_image }}" alt="Avatar" width="200" height="200"><br><br>{% endif %}
+
+                <b>VCard: </b> {{ card_profile.vcard }}<br>
+
+                <b>First name: </b>{{ card_profile.first_name }}<br>
+                <b>Last name: </b>{{ card_profile.last_name }}<br>
+                <b>Gender: </b>{{ card_profile.gender }}<br>
+                <b>Title: </b>{% if card_profile.title %}{{ card_profile.title }}{% else %}N/A{% endif %}<br>
+                <b>Company: </b>{% if card_profile.company %}{{ card_profile.company }}{% else %}N/A{% endif %}<br>
+                <b>Email: </b>{{ card_profile.email }}<br>
+                <b>Phone: </b>{{ card_profile.phone }}{% if card_profile.phone %}{% else %}N/A{% endif %}<br>
+                <b>Website: </b>{% if card_profile.website %}{{ card_profile.website }}{% else %}N/A{% endif %}<br>
+                <b>Facebook URL: </b>{% if card_profile.facebook_url %}{{ card_profile.facebook_url }}{% else %}N/A{% endif %}<br>
+                <b>Linkedin URL: </b>{% if card_profile.linkedin_url %}{{ card_profile.linkedin_url }}{% else %}N/A{% endif %}<br>
+                <b>Instagram URL: </b>{% if card_profile.instagram_url %}{{ card_profile.instagram_url }}{% else %}N/A{% endif %}<br>
+                <b>Pinterest URL:</b>{% if card_profile.pinterest_url %}{{ card_profile.pinterest_url }}{% else %}N/A{% endif %}<br>
+                <b>Twitter URL: </b>{% if card_profile.twitter_url %}{{ card_profile.twitter_url }}{% else %}N/A{% endif %}<br>
+                <b>Youtube Channel URL: </b>{% if card_profile.youtube_url %}{{ card_profile.youtube_url }}{% else %}N/A{% endif %}<br>
+                <b>Snapchat URL: </b>{% if card_profile.snapchat_url %}{{ card_profile.snapchat_url }}{% else %}N/A{% endif %}<br>
+                <b>Whatsapp URL: </b>{% if card_profile.whatsapp_url %}{{ card_profile.whatsapp_url }}{% else %}N/A{% endif %}<br>
+                <b>Tiktok URL: </b>{% if card_profile.tiktok_url %}{{ card_profile.tiktok_url }}{% else %}N/A{% endif %}<br>
+                <b>Telegram URL: </b>{% if card_profile.telegram_url %}{{ card_profile.telegram_url }}{% else %}N/A{% endif %}<br>
+                <b>Skype URL: </b>{% if card_profile.skype_url %}{{ card_profile.skype_url }}{% else %}N/A{% endif %}<br>
+                <b>Github URL: </b>{% if card_profile.github_url %}{{ card_profile.github_url }}{% else %}N/A{% endif %}<br>
+                <b>Gitlab URL: </b>{% if card_profile.gitlab_url %}{{ card_profile.gitlab_url }}{% else %}N/A{% endif %}<br>
+
+                <b>Card profile name: </b>{{ card_profile.card_profile_name }}<br>
+                <br>
+                <a href="{% url 'display_profile_card_profile_name' card_profile.card_profile_name %}" class="button is-link" target="blank_">Public profile</a>
+                <a href="{% url 'download_vcard' card_profile.id %}" class="button is-link" target="blank_">Download VCard</a>
+                <a href="{% url 'edit_card_profile' card_profile.id %}" class="button is-success">Edit card profile</a>
+                <a href="{% url 'delete_card_profile' card_profile.id %}" class="button is-danger">Delete card profile</a>
+        {% endif %}
+{% endblock %}
+
